@@ -53,4 +53,21 @@ class UserController extends Controller
             return response()->json(['data' => 'Incomplete data'], 406);
         }
     }
+
+    public function changePassword(Request $request)
+    {
+        if (!empty($request->oldpassword) AND !empty($request->newpassword)) {
+            $user = $request->user();
+            $provided_password = $request->oldpassword;
+            if (Hash::check($provided_password, $user->password)) {
+                $user->password = Hash::make($request->newpassword);
+                $user->save();
+                return response()->json(['data' => 'Successfully changed password'], 200);
+            } else {
+                return response()->json(['data' => 'Incorrect Password'], 400);
+            }
+        } else {
+            return response()->json(['data' => 'Incomplete data'], 406);
+        }
+    }
 }
