@@ -7,3 +7,4 @@ A barebones laravel application with core functionality exposed via rest.
 * User Password change
 * Auth Token for authenticating requests
 * Password reset through mail
+* CORS Support
